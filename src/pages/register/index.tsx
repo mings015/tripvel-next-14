@@ -24,7 +24,7 @@ const RegisterPage = () => {
         <div className="flex flex-col px-10 gap-5 md:p-20 w-full justify-center h-full md:w-1/2">
           <div>
             <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 my-5">
-              Register Page
+              Register
             </h2>
           </div>
           <div>
@@ -81,9 +81,8 @@ const RegisterPage = () => {
           </div>
           <OrDevider />
           <LogoOptionLogin />
-          <p className="text-center text-sm pt-10">
-            Already have an account?
-            {}
+          <p className="text-center text-sm md:pt-10 pb-10">
+            Already have an account? {}
             <Link className="text-primary" href={"/login"}>
               Log in here
             </Link>
