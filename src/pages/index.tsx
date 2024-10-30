@@ -1,11 +1,10 @@
-import { Button } from "@/components/ui/button";
+import Header from "@/components/header";
 
 export default function Home() {
   return (
-    <div className="mx-auto container">
-      <h1>halo</h1>
-      <h2>asasas</h2>
-      <Button>Halo</Button>
+    <div>
+      <Header />
+      <div>Halo</div>
     </div>
   );
 }

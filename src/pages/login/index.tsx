@@ -10,8 +10,7 @@ import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 
 const LoginPage = () => {
-  const { formData, success, error, isLoading, handleChange, handleLogin } =
-    UseLogin();
+  const { success, error, isLoading, handleLogin } = UseLogin();
   return (
     <div>
       <div className="flex flex-col h-screen md:flex-row-reverse">
@@ -39,15 +38,15 @@ const LoginPage = () => {
             )}
           </div>
           <div>
-            <form>
+            <form onSubmit={handleLogin}>
               <div className="grid w-full items-center gap-4">
                 <div className="flex flex-col space-y-1.5">
                   <Label htmlFor="email">Email</Label>
                   <Input
                     id="email"
+                    name="email"
                     placeholder="Enter your email"
-                    value={formData.email}
-                    onChange={handleChange}
+                    type="email"
                     required
                   />
                 </div>
@@ -55,18 +54,13 @@ const LoginPage = () => {
                   <Label htmlFor="password">Password</Label>
                   <Input
                     id="password"
+                    name="password"
                     placeholder="Enter your password"
                     type="password"
-                    value={formData.password}
-                    onChange={handleChange}
                     required
                   />
                 </div>
-                <Button
-                  className="my-3"
-                  onClick={handleLogin}
-                  disabled={isLoading}
-                >
+                <Button className="my-3" type="submit" disabled={isLoading}>
                   {isLoading ? "Logging in..." : "Login"}
                 </Button>
               </div>
