@@ -60,7 +60,7 @@ export default function Header() {
                   Contact Us
                 </Link>
                 <Link
-                  href="#"
+                  href="faqs"
                   className="flex w-full items-center py-2 text-lg font-semibold"
                   prefetch={false}
                 >
@@ -103,7 +103,7 @@ export default function Header() {
               </NavigationMenuLink>
               <NavigationMenuLink asChild>
                 <Link
-                  href="#"
+                  href="faqs"
                   className="group inline-flex h-9 w-max items-center justify-center px-4 py-2 text-sm font-medium transition-all hover:border-b-2 hover:border-black focus:border-b-2 focus:border-black dark:hover:border-white dark:focus:border-white outline-none"
                   prefetch={false}
                 >

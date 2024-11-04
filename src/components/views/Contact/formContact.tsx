@@ -16,7 +16,7 @@ const FormContact = () => {
   return (
     <div className="mt-20 mx-auto container px-6 py-10">
       <div className="md:flex grid gap-10">
-        <div className="md:w-1/2 flex flex-col gap-3">
+        <div className="md:w-1/2 flex flex-col gap-3 md:text-end text-start">
           <h2 className="text-3xl font-bold leading-none tracking-tight mb-4">
             TINGGALKAN PESAN 😍
           </h2>
@@ -26,7 +26,7 @@ const FormContact = () => {
             dipublikasikan.
           </p>
           <div className="text-main font-semibold text-lg">Waktu Kerja</div>
-          <div className="flex items-center mt-1 gap-4">
+          <div className="flex items-center mt-1 gap-4 md:justify-end justify-start">
             <Icon icon="lets-icons:clock-light" fontSize={32} />
             <span>Senin-Minggu: 24 jam</span>
           </div>
