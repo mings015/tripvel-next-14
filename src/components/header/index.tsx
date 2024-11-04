@@ -30,7 +30,7 @@ export default function Header() {
             <SheetContent side="left">
               <SheetHeader>
                 <SheetTitle>
-                  <Link href="#" prefetch={false}>
+                  <Link href="/" prefetch={false}>
                     <LogoTrip className="h-24 w-24" />
                   </Link>
                 </SheetTitle>
@@ -39,14 +39,14 @@ export default function Header() {
 
               <div className="grid gap-2 py-6">
                 <Link
-                  href="#"
+                  href="/"
                   className="flex w-full items-center py-2 text-lg font-semibold"
                   prefetch={false}
                 >
                   Home
                 </Link>
                 <Link
-                  href="#"
+                  href="/about-us"
                   className="flex w-full items-center py-2 text-lg font-semibold"
                   prefetch={false}
                 >
@@ -69,14 +69,14 @@ export default function Header() {
               </div>
             </SheetContent>
           </Sheet>
-          <Link href="#" className="mr-6 hidden lg:flex" prefetch={false}>
+          <Link href="/" className="mr-6 hidden lg:flex" prefetch={false}>
             <LogoTrip className="h-24 w-24" />
           </Link>
           <NavigationMenu className="hidden lg:flex">
             <NavigationMenuList>
               <NavigationMenuLink asChild>
                 <Link
-                  href="#"
+                  href="/"
                   className="group inline-flex h-9 w-max items-center justify-center px-4 py-2 text-sm font-medium transition-all hover:border-b-2 hover:border-black focus:border-b-2 focus:border-black dark:hover:border-white dark:focus:border-white outline-none"
                   prefetch={false}
                 >
@@ -85,7 +85,7 @@ export default function Header() {
               </NavigationMenuLink>
               <NavigationMenuLink asChild>
                 <Link
-                  href="#"
+                  href="/about-us"
                   className="group inline-flex h-9 w-max items-center justify-center px-4 py-2 text-sm font-medium transition-all hover:border-b-2 hover:border-black focus:border-b-2 focus:border-black dark:hover:border-white dark:focus:border-white outline-none"
                   prefetch={false}
                 >

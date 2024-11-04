@@ -76,8 +76,8 @@ const Footer = () => {
             <div className="text-center sm:text-left">
               <p className="text-lg font-medium text-gray-900">Contact Us</p>
 
-              <ul className="mt-8 space-y-4 text-sm">
-                <li>
+              <ul className="mt-8 space-y-4 text-sm flex flex-col justify-center items-center sm:justify-start sm:items-start">
+                <li className="">
                   <Link
                     className="flex items-center justify-center gap-1.5 ltr:sm:justify-start rtl:sm:justify-end"
                     href="#"
