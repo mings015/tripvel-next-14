@@ -2,7 +2,7 @@ import Layout from "@/components/Layout";
 import HeroAbout from "@/components/views/About/heroAbout";
 import React from "react";
 
-const Index = () => {
+const About = () => {
   return (
     <Layout>
       <HeroAbout />
@@ -10,4 +10,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default About;

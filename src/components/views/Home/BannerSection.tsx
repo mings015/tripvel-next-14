@@ -1,12 +1,6 @@
 import TitleMain from "@/components/content/titleMain";
 import { Button } from "@/components/ui/button";
 import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/cardCustom";
-import {
   Carousel,
   CarouselContent,
   CarouselItem,

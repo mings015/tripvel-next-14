@@ -1,7 +1,6 @@
 import Image from "next/image";
 import React from "react";
 import { Icon } from "@iconify/react";
-import { Separator } from "@/components/ui/separator";
 
 const HeroAbout = () => {
   return (
@@ -14,7 +13,6 @@ const HeroAbout = () => {
             objectFit="cover"
             quality={90}
             alt="Background"
-            className=""
           />
         </div>
         <div className="relative z-10 flex flex-col items-center justify-center h-[750px] p-7 container mx-auto">
