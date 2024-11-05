@@ -14,7 +14,7 @@ import {
   NavigationMenuLink,
 } from "@/components/ui/navigation-menu";
 import { Menu } from "lucide-react";
-import LogoTrip from "../ui/logoTripvel";
+import LogoTrip from "@/components/ui/logoTripvel";
 
 export default function Header() {
   return (

@@ -1,9 +1,9 @@
 import React from "react";
-import LogoTrip from "../ui/logoTripvel";
+import LogoTrip from "../../ui/logoTripvel";
 import Link from "next/link";
 import { Icon } from "@iconify/react";
-import AppStoreDownload from "../icon/downloadAppStore";
-import PlayStoreDownload from "../icon/downloadPlaySote";
+import AppStoreDownload from "../../icon/downloadAppStore";
+import PlayStoreDownload from "../../icon/downloadPlaySote";
 
 const Footer = () => {
   return (
