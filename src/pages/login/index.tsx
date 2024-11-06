@@ -1,13 +1,13 @@
 import ImageLoginRegis from "@/components/content/imageLoginRegis";
 import LogoOptionLogin from "@/components/content/logoOptionLogin";
 import OrDevider from "@/components/content/orDevider";
+import Link from "next/link";
+import UseLogin from "@/hooks/useLogin";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import UseLogin from "@/hooks/useLogin";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
-import Link from "next/link";
 
 const LoginPage = () => {
   const { success, error, isLoading, handleLogin } = UseLogin();

@@ -15,8 +15,39 @@ import {
 } from "@/components/ui/navigation-menu";
 import { Menu } from "lucide-react";
 import LogoTrip from "@/components/ui/logoTripvel";
+import { useUser } from "@/context/UserContext";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Icon } from "@iconify/react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import { useState } from "react";
+import UseLogout from "@/hooks/useLogout";
+import { useToast } from "@/hooks/use-toast";
+import DialogEditProfile from "./components/DialogEditProfile";
 
 export default function Header() {
+  const { user, loading, error } = useUser();
+
+  const { isLoading, handleLogout } = UseLogout();
+  const [isAlertOpen, setIsAlertOpen] = useState(false);
+  const [isDialogOpen, setDialogOpen] = useState(false);
+
   return (
     <div className="fixed top-0 left-0 right-0 z-50 bg-white/50 backdrop-blur-sm">
       <div className="container mx-auto px-6 ">
@@ -113,12 +144,74 @@ export default function Header() {
             </NavigationMenuList>
           </NavigationMenu>
           <div className="ml-auto flex gap-2">
-            <Link href="/login">
-              <Button>
-                Sign in
-                <span className="text-black mx-2 text-xl"> | </span> Sign Up
-              </Button>
-            </Link>
+            {loading && <div></div>}
+            {error && <div>Error: {error}</div>}
+
+            {!user ? (
+              <Link href="/login">
+                <Button>
+                  Sign in
+                  <span className="text-black mx-2 text-xl"> | </span> Sign Up
+                </Button>
+              </Link>
+            ) : (
+              <div className="flex items-center space-x-4">
+                <Link href="faqs" className="pr-4">
+                  <Icon icon="mdi:cart-outline" fontSize={28} />
+                </Link>
+
+                <DropdownMenu>
+                  <DropdownMenuTrigger>
+                    <div className="flex justify-center items-center gap-2">
+                      <Avatar className="h-10 w-10">
+                        <AvatarImage src={user.profilePictureUrl} alt="#" />
+                        <AvatarFallback>CN</AvatarFallback>
+                      </Avatar>
+                      <h1 className="font-semibold">{user.name}</h1>
+                    </div>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={() => setDialogOpen(true)}>
+                      Edit
+                    </DropdownMenuItem>
+                    <DropdownMenuItem>Transaksi</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => setIsAlertOpen(true)}>
+                      Logout
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+                <DialogEditProfile
+                  isOpen={isDialogOpen}
+                  onOpenChange={setDialogOpen}
+                />
+                <AlertDialog open={isAlertOpen} onOpenChange={setIsAlertOpen}>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>Konfirmasi Logout</AlertDialogTitle>
+                      <AlertDialogDescription>
+                        Apakah Anda yakin ingin keluar dari akun Anda?
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel disabled={isLoading}>
+                        Batal
+                      </AlertDialogCancel>
+                      <AlertDialogAction
+                        onClick={handleLogout}
+                        disabled={isLoading}
+                        className={
+                          isLoading ? "opacity-50 cursor-not-allowed" : ""
+                        }
+                      >
+                        {isLoading ? "Logging out..." : "Logout"}
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
+              </div>
+            )}
           </div>
         </header>
       </div>
