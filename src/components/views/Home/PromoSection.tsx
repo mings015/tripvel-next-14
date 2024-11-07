@@ -14,8 +14,12 @@ import {
 import ImageCard from "@/components/ui/imageCard";
 
 import React from "react";
+import usePromo from "./hooks/usePromo";
+import Link from "next/link";
+import { getImageUrl } from "@/helper/defaultImg";
 
 const PromoSection = () => {
+  const { data, isLoading, error } = usePromo();
   return (
     <div className="mt-36 mx-auto container px-4">
       <TitleMain
@@ -25,7 +29,7 @@ const PromoSection = () => {
       <div className="relative bg-slate-200 rounded-2xl p-6 shadow-lg">
         <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-6 h-12 bg-white rounded-r-full" />
         <div className="absolute -right-2 top-1/2 -translate-y-1/2 w-6 h-12 bg-white rounded-l-full" />
-        <div className="flex flex-col gap-4 md:flex-row  p-5 rounded-base">
+        <div className="flex flex-col gap-4 md:flex-row p-5 rounded-base">
           <div className="md:w-1/3 w-full justify-center flex flex-col gap-2">
             <h4 className="text-2xl font-semibold tracking-tight">
               Nikmati promo hingga 80%
@@ -42,18 +46,25 @@ const PromoSection = () => {
               className=""
             >
               <CarouselContent>
-                {Array.from({ length: 5 }).map((_, index) => (
-                  <CarouselItem key={index} className="basis-1/2 lg:basis-1/3">
-                    <div className="p-1">
-                      <ImageCard imageUrl="https://hips.hearstapps.com/hmg-prod/images/flowers-trees-and-bushes-reach-their-peak-of-full-bloom-in-news-photo-1678292967.jpg?resize=300:*">
-                        <CardHeader className="p-2">
-                          <CardTitle>Beli 1 Gratis 1</CardTitle>
-                          <CardDescription>
-                            Minimal Belanja 100K
-                          </CardDescription>
-                        </CardHeader>
-                      </ImageCard>
-                    </div>
+                {isLoading && <div>Loading...</div>}
+                {error && <div>{error}</div>}
+                {data.map((promo) => (
+                  <CarouselItem
+                    key={promo.id}
+                    className="sm:basis-1/2 lg:basis-1/3 basis-1/1"
+                  >
+                    <Link href={`promo/${promo.id}`}>
+                      <div className="p-1">
+                        <ImageCard imageUrl={getImageUrl(promo.imageUrl)}>
+                          <CardHeader className="p-2 h-32">
+                            <CardTitle>{promo.title}</CardTitle>
+                            <CardDescription className="line-clamp-2">
+                              {promo.description}
+                            </CardDescription>
+                          </CardHeader>
+                        </ImageCard>
+                      </div>
+                    </Link>
                   </CarouselItem>
                 ))}
               </CarouselContent>

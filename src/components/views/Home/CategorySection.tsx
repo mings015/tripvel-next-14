@@ -8,8 +8,12 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import ImageCard from "@/components/ui/imageCard";
+import useCategory from "./hooks/useCategory";
+import Link from "next/link";
 
 const CategorySection = () => {
+  const { data, isLoading, error } = useCategory();
+
   return (
     <div className=" mx-auto container px-4">
       <TitleMain
@@ -26,18 +30,24 @@ const CategorySection = () => {
           className="w-full"
         >
           <CarouselContent>
-            {Array.from({ length: 5 }).map((_, index) => (
+            {isLoading && <div>Loading...</div>}
+            {error && <div>{error}</div>}
+            {data.map((category) => (
               <CarouselItem
-                key={index}
-                className="md:basis-1/3 lg:basis-1/4 basis-1/2"
+                key={category.id}
+                className="md:basis-1/3 lg:basis-1/4 basis-1/1"
               >
-                <div className="p-1">
-                  <ImageCard imageUrl="https://hips.hearstapps.com/hmg-prod/images/flowers-trees-and-bushes-reach-their-peak-of-full-bloom-in-news-photo-1678292967.jpg?resize=300:*">
-                    <CardHeader className="p-2">
-                      <CardTitle className="text-center">Category 1</CardTitle>
-                    </CardHeader>
-                  </ImageCard>
-                </div>
+                <Link href={`category/${category.id}`}>
+                  <div className="p-1">
+                    <ImageCard imageUrl={category.imageUrl}>
+                      <CardHeader className="p-2">
+                        <CardTitle className="text-center">
+                          {category.name}
+                        </CardTitle>
+                      </CardHeader>
+                    </ImageCard>
+                  </div>
+                </Link>
               </CarouselItem>
             ))}
           </CarouselContent>
