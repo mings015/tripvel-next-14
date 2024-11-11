@@ -9,6 +9,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Star, Users, ArrowRight, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { CardSkeleton } from "@/components/content/Skeleton";
 
 const Category = () => {
   const { data, isLoading, error } = useCaregoryId();
@@ -23,6 +24,7 @@ const Category = () => {
           <div className="flex items-center gap-2">
             <Loader2 className="h-6 w-6 animate-spin" />
             <span>Initializing...</span>
+            <CardSkeleton />
           </div>
         </div>
       </Layout>
@@ -36,6 +38,7 @@ const Category = () => {
           <div className="flex items-center gap-2">
             <Loader2 className="h-6 w-6 animate-spin" />
             <span>Loading amazing activities...</span>
+            <CardSkeleton />
           </div>
         </div>
       </Layout>

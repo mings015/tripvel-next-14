@@ -5,6 +5,7 @@ import React from "react";
 import { Calendar, Clock, User, Share2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import { CardSkeleton } from "@/components/content/Skeleton";
 
 const Banner = () => {
   const { data, isLoading, error } = useBannerId();
@@ -15,10 +16,14 @@ const Banner = () => {
       <div className="mt-20 container mx-auto px-4">
         {!router.isReady && (
           <div className="mt-20 container mx-auto">
-            <div>Initializing...</div>
+            <CardSkeleton />
           </div>
         )}
-        {isLoading && <div className="text-center py-8">Loading...</div>}
+        {isLoading && (
+          <div className="text-center py-8">
+            <CardSkeleton />
+          </div>
+        )}
 
         {error && <div className="text-center text-red-500 py-8">{error}</div>}
 

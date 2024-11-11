@@ -22,6 +22,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import PaymentMethod from "@/hooks/cart/usePayment";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import CreateTransaksi from "@/components/views/Cart/CreateTransaksi";
+import { DashboardSkeleton } from "@/components/content/Skeleton";
 
 const Cart = () => {
   const { data, isLoadingCart, errorCart, refreshCart } = useGetCart();
@@ -34,7 +35,7 @@ const Cart = () => {
       <Layout>
         <div className="min-h-screen flex items-center justify-center">
           <Loader2 className="h-8 w-8 animate-spin" />
-          <span className="ml-2">Loading your cart...</span>
+          <DashboardSkeleton />
         </div>
       </Layout>
     );

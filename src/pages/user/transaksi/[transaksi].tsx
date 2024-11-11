@@ -17,6 +17,9 @@ import {
 } from "lucide-react";
 import { FORMAT_DATE } from "@/helper/convertTime";
 import CancelTransaksiButton from "@/components/views/Transaksi/CancelTransaksiButton";
+import { useState } from "react";
+import UploadProofPaymentDialog from "@/components/views/Transaksi/UploadProofPaymentDialog";
+import { DashboardSkeleton } from "@/components/content/Skeleton";
 
 const getStatusColor = (status: string) => {
   switch (status.toLowerCase()) {
@@ -33,14 +36,20 @@ const getStatusColor = (status: string) => {
 
 const TransaksiDetail = () => {
   const { data, isLoading, error } = useTransaksiId();
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [selectedTransaksiId, setSelectedTransaksiId] = useState<string>("");
 
+  const handleUploadClick = (transaksiId: string) => {
+    setSelectedTransaksiId(transaksiId);
+    setIsDialogOpen(true);
+  };
   if (isLoading) {
     return (
       <Layout>
         <div className="min-h-screen flex items-center justify-center">
           <div className="flex items-center gap-2">
             <Loader2 className="h-6 w-6 animate-spin" />
-            <span>Loading transaction details...</span>
+            <DashboardSkeleton />
           </div>
         </div>
       </Layout>
@@ -189,14 +198,17 @@ const TransaksiDetail = () => {
                     <div className="space-y-3">
                       <Button
                         className="w-full"
-                        variant="default"
-                        onClick={() => {
-                          /* Handle upload */
-                        }}
+                        onClick={() => handleUploadClick(data.id)}
                       >
-                        <Upload className="h-4 w-4 mr-2" />
-                        Upload Payment Proof
+                        <Upload className="h-4 w-4 mr-2" /> Upload Payment Proof
                       </Button>
+
+                      <UploadProofPaymentDialog
+                        isOpen={isDialogOpen}
+                        onOpenChange={setIsDialogOpen}
+                        transaksiId={selectedTransaksiId}
+                      />
+
                       <CancelTransaksiButton
                         transaksiId={data.id}
                         invoiceId={data.invoiceId}

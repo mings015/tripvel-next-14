@@ -10,6 +10,7 @@ import {
 import ImageCard from "@/components/ui/imageCard";
 import useCategory from "./hooks/useCategory";
 import Link from "next/link";
+import { CardSkeleton } from "@/components/content/Skeleton";
 
 const CategorySection = () => {
   const { data, isLoading, error } = useCategory();
@@ -30,7 +31,7 @@ const CategorySection = () => {
           className="w-full"
         >
           <CarouselContent>
-            {isLoading && <div>Loading...</div>}
+            {isLoading && <CardSkeleton />}
             {error && <div>{error}</div>}
             {data.map((category) => (
               <CarouselItem

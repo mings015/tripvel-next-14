@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import { FORMAT_DATE } from "@/helper/convertTime";
 import Link from "next/link";
+import { TableSkeleton } from "@/components/content/Skeleton";
 
 const getStatusColor = (status: string) => {
   switch (status.toLowerCase()) {
@@ -41,11 +42,9 @@ const TransaksiPage = () => {
   if (isLoading) {
     return (
       <Layout>
-        <div className="min-h-screen flex items-center justify-center">
-          <div className="flex items-center gap-2">
-            <Loader2 className="h-6 w-6 animate-spin" />
-            <span>Loading transactions...</span>
-          </div>
+        <div className="mx-auto container items-center justify-center">
+          <Loader2 className="h-6 w-6 animate-spin" />
+          <TableSkeleton />
         </div>
       </Layout>
     );

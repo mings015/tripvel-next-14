@@ -15,6 +15,7 @@ import { useUser } from "@/context/UserContext";
 import axios from "axios";
 import { API_KEY, BASE_URL, END_POINT } from "@/helper/endpoint";
 import { useToast } from "@/hooks/use-toast";
+import UseUploadImage from "@/hooks/useUploadImage";
 
 interface DialogProps {
   isOpen: boolean;
@@ -34,6 +35,7 @@ const DialogEditProfile: React.FC<DialogProps> = ({ isOpen, onOpenChange }) => {
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
+  const { uploadImage } = UseUploadImage();
 
   const [formData, setFormData] = useState<FormData>({
     name: user?.name || "",
@@ -61,44 +63,6 @@ const DialogEditProfile: React.FC<DialogProps> = ({ isOpen, onOpenChange }) => {
       ...prev,
       [id]: value,
     }));
-  };
-
-  // Upload image
-  const uploadImage = async (file: File): Promise<string> => {
-    const imageFormData = new FormData();
-    imageFormData.append("image", file);
-
-    try {
-      const token = document.cookie
-        .split("; ")
-        .find((row) => row.startsWith("token="))
-        ?.split("=")[1];
-
-      const response = await axios.post(
-        `${BASE_URL.API}${END_POINT.UPLOAD_IMAGE}`,
-        imageFormData,
-        {
-          headers: {
-            apiKey: API_KEY,
-            Authorization: `Bearer ${token}`,
-          },
-          onUploadProgress: (progressEvent) => {
-            if (progressEvent.total) {
-              const progress =
-                (progressEvent.loaded / progressEvent.total) * 100;
-              setUploadProgress(Math.round(progress));
-            }
-          },
-        }
-      );
-
-      if (response.data?.code === "200") {
-        return response.data.data.url;
-      }
-      throw new Error("Failed to upload image");
-    } catch (error) {
-      throw error;
-    }
   };
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {

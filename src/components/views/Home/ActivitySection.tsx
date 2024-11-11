@@ -14,6 +14,7 @@ import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Star, Users } from "lucide-react";
+import { CardSkeleton } from "@/components/content/Skeleton";
 
 const ActivitySection = () => {
   const { data, isLoading, error } = useActivity();
@@ -32,7 +33,7 @@ const ActivitySection = () => {
           className=""
         >
           <CarouselContent>
-            {isLoading && <div>Loading...</div>}
+            {isLoading && <CardSkeleton />}
             {error && <div>{error}</div>}
             {data.map((activity) => (
               <CarouselItem

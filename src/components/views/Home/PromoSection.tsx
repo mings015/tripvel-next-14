@@ -17,6 +17,7 @@ import React from "react";
 import usePromo from "./hooks/usePromo";
 import Link from "next/link";
 import { getImageUrl } from "@/helper/defaultImg";
+import { CardSkeleton } from "@/components/content/Skeleton";
 
 const PromoSection = () => {
   const { data, isLoading, error } = usePromo();
@@ -46,7 +47,7 @@ const PromoSection = () => {
               className=""
             >
               <CarouselContent>
-                {isLoading && <div>Loading...</div>}
+                {isLoading && <CardSkeleton />}
                 {error && <div>{error}</div>}
                 {data.map((promo) => (
                   <CarouselItem

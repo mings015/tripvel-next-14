@@ -8,6 +8,7 @@ import { toast } from "@/hooks/use-toast";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { formatToIDR } from "@/helper/convertIDR";
+import { CardSkeleton } from "@/components/content/Skeleton";
 
 const PromoDetail = () => {
   const { data, isLoading, error } = usePromoId();
@@ -30,7 +31,7 @@ const PromoDetail = () => {
     return (
       <Layout>
         <div className="mt-20 container mx-auto">
-          <div>Initializing...</div>
+          <CardSkeleton />
         </div>
       </Layout>
     );
@@ -39,7 +40,12 @@ const PromoDetail = () => {
   return (
     <Layout>
       <div className="mt-20 container mx-auto px-6">
-        {isLoading && <div className="text-center py-8">Loading...</div>}
+        {isLoading && (
+          <div className="text-center py-8">
+            Loading/..
+            <CardSkeleton />
+          </div>
+        )}
 
         {error && <div className="text-center text-red-500 py-8">{error}</div>}
 

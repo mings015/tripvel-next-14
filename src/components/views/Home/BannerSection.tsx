@@ -10,6 +10,7 @@ import {
 import Image from "next/image";
 import useBanner from "./hooks/useBanner";
 import Link from "next/link";
+import { CardSkeleton } from "@/components/content/Skeleton";
 
 const BannerSection = () => {
   const { data, isLoading, error } = useBanner();
@@ -24,7 +25,7 @@ const BannerSection = () => {
       <div className="">
         <Carousel className="w-full rounded-lg">
           <CarouselContent>
-            {isLoading && <div>Loading...</div>}
+            {isLoading && <CardSkeleton />}
             {error && <div>{error}</div>}
             {data.map((banner) => (
               <CarouselItem key={banner.id}>
