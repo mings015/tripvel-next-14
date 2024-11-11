@@ -3,15 +3,18 @@ import Layout from "@/components/Layout";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { CustomBreadcrumb } from "@/components/ui/custom-breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import useActivity from "@/components/views/Home/hooks/useActivity";
 import { formatToIDR } from "@/helper/convertIDR";
+import { useBreadcrumb } from "@/hooks/useBreadcrumb";
 import { ArrowRight, Loader2, MapPin, Star, Users } from "lucide-react";
 import { useRouter } from "next/router";
 import React from "react";
 
 const Activity = () => {
   const router = useRouter();
+  const breadcrumbItems = useBreadcrumb();
 
   const { data, isLoading, error } = useActivity();
 
@@ -55,6 +58,7 @@ const Activity = () => {
 
       <div className="my-10 mx-auto container">
         <div className="max-w-4xl mx-auto px-4">
+          <CustomBreadcrumb items={breadcrumbItems} className="mb-6 flex" />
           <div className="mb-8">
             <Badge variant="secondary" className="mb-4">
               Promo Spesial

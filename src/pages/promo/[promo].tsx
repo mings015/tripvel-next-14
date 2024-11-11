@@ -9,9 +9,14 @@ import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { formatToIDR } from "@/helper/convertIDR";
 import { CardSkeleton } from "@/components/content/Skeleton";
+import { useBreadcrumb } from "@/hooks/useBreadcrumb";
+import { CustomBreadcrumb } from "@/components/ui/custom-breadcrumb";
 
 const PromoDetail = () => {
+  const breadcrumbItems = useBreadcrumb();
+
   const { data, isLoading, error } = usePromoId();
+
   const router = useRouter();
   const copyPromoCode = () => {
     navigator.clipboard.writeText(data!.promo_code);
@@ -40,6 +45,8 @@ const PromoDetail = () => {
   return (
     <Layout>
       <div className="mt-20 container mx-auto px-6">
+        <CustomBreadcrumb items={breadcrumbItems} className="mb-6 flex" />
+
         {isLoading && (
           <div className="text-center py-8">
             Loading/..

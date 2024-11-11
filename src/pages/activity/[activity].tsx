@@ -18,9 +18,12 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { CustomBreadcrumb } from "@/components/ui/custom-breadcrumb";
+import { useBreadcrumb } from "@/hooks/useBreadcrumb";
 
 const ActivityDetail = () => {
   const { user } = useUser();
+  const breadcrumbItems = useBreadcrumb();
 
   const { data, isLoading, error } = useActivityId();
   const router = useRouter();
@@ -66,6 +69,8 @@ const ActivityDetail = () => {
         {data && (
           <>
             <div className="max-w-6xl mx-auto">
+              <CustomBreadcrumb items={breadcrumbItems} className="mb-6 flex" />
+
               <div className="flex flex-col md:flex-row gap-6 mb-8">
                 <div className="md:w-2/3">
                   <div className="rounded-xl overflow-hidden">

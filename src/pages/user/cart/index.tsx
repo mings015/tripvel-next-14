@@ -23,8 +23,11 @@ import PaymentMethod from "@/hooks/cart/usePayment";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import CreateTransaksi from "@/components/views/Cart/CreateTransaksi";
 import { DashboardSkeleton } from "@/components/content/Skeleton";
+import { useBreadcrumb } from "@/hooks/useBreadcrumb";
+import { CustomBreadcrumb } from "@/components/ui/custom-breadcrumb";
 
 const Cart = () => {
+  const breadcrumbItems = useBreadcrumb();
   const { data, isLoadingCart, errorCart, refreshCart } = useGetCart();
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
   const { ListPayment, isLoading, error } = PaymentMethod();
@@ -92,6 +95,7 @@ const Cart = () => {
     <Layout>
       <div className="container mx-auto px-4 py-8 mt-20">
         <div className="max-w-6xl mx-auto">
+          <CustomBreadcrumb items={breadcrumbItems} className="mb-6 flex" />
           <div className="flex items-center justify-between mb-8">
             <h1 className="text-3xl font-bold">Your Cart</h1>
             <span className="text-gray-500">

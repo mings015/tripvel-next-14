@@ -22,6 +22,8 @@ import {
 import { FORMAT_DATE } from "@/helper/convertTime";
 import Link from "next/link";
 import { TableSkeleton } from "@/components/content/Skeleton";
+import { useBreadcrumb } from "@/hooks/useBreadcrumb";
+import { CustomBreadcrumb } from "@/components/ui/custom-breadcrumb";
 
 const getStatusColor = (status: string) => {
   switch (status.toLowerCase()) {
@@ -38,6 +40,7 @@ const getStatusColor = (status: string) => {
 
 const TransaksiPage = () => {
   const { data, isLoading, error } = useGetTransaksi();
+  const breadcrumbItems = useBreadcrumb();
 
   if (isLoading) {
     return (
@@ -66,6 +69,7 @@ const TransaksiPage = () => {
   return (
     <Layout>
       <div className="container mx-auto px-4 py-8 mt-20">
+        <CustomBreadcrumb items={breadcrumbItems} className="mb-6 flex" />
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold">Transaction History</h1>
           <Badge variant="outline" className="font-normal">

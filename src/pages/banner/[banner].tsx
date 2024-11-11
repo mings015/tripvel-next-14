@@ -6,8 +6,12 @@ import { Calendar, Clock, User, Share2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { CardSkeleton } from "@/components/content/Skeleton";
+import { useBreadcrumb } from "@/hooks/useBreadcrumb";
+import { CustomBreadcrumb } from "@/components/ui/custom-breadcrumb";
 
 const Banner = () => {
+  const breadcrumbItems = useBreadcrumb();
+
   const { data, isLoading, error } = useBannerId();
   const router = useRouter();
 
@@ -30,6 +34,7 @@ const Banner = () => {
         {data && (
           <div className="">
             <article className="container mx-auto py-8 px-4 max-w-4xl">
+              <CustomBreadcrumb items={breadcrumbItems} className="mb-6 flex" />
               <h1 className="text-3xl font-bold mb-4">{data.name}</h1>
 
               <header className="mb-8">

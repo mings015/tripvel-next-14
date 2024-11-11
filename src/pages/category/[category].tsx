@@ -10,8 +10,12 @@ import { Badge } from "@/components/ui/badge";
 import { MapPin, Star, Users, ArrowRight, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CardSkeleton } from "@/components/content/Skeleton";
+import { CustomBreadcrumb } from "@/components/ui/custom-breadcrumb";
+import { useBreadcrumb } from "@/hooks/useBreadcrumb";
 
 const Category = () => {
+  const breadcrumbItems = useBreadcrumb();
+
   const { data, isLoading, error } = useCaregoryId();
   const { dataActivity, isLoadingActivity, errorActivity } =
     useActivityCategory();
@@ -64,6 +68,8 @@ const Category = () => {
     <Layout>
       <div className="mt-20 container mx-auto px-4 pb-10">
         <div className="max-w-4xl mx-auto px-4">
+          <CustomBreadcrumb items={breadcrumbItems} className="mb-6 flex" />
+
           {data && (
             <div className="relative mb-12">
               <div className="relative h-[400px] rounded-2xl overflow-hidden mb-6">

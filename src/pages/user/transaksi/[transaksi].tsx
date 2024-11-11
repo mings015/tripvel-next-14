@@ -20,6 +20,8 @@ import CancelTransaksiButton from "@/components/views/Transaksi/CancelTransaksiB
 import { useState } from "react";
 import UploadProofPaymentDialog from "@/components/views/Transaksi/UploadProofPaymentDialog";
 import { DashboardSkeleton } from "@/components/content/Skeleton";
+import { CustomBreadcrumb } from "@/components/ui/custom-breadcrumb";
+import { useBreadcrumb } from "@/hooks/useBreadcrumb";
 
 const getStatusColor = (status: string) => {
   switch (status.toLowerCase()) {
@@ -38,6 +40,7 @@ const TransaksiDetail = () => {
   const { data, isLoading, error } = useTransaksiId();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [selectedTransaksiId, setSelectedTransaksiId] = useState<string>("");
+  const breadcrumbItems = useBreadcrumb();
 
   const handleUploadClick = (transaksiId: string) => {
     setSelectedTransaksiId(transaksiId);
@@ -74,6 +77,8 @@ const TransaksiDetail = () => {
   return (
     <Layout>
       <div className="container mx-auto px-4 py-8 mt-20">
+        <CustomBreadcrumb items={breadcrumbItems} className="mb-6 flex" />
+
         {/* Header Section */}
         <div className="flex justify-between items-center mb-6">
           <div>
