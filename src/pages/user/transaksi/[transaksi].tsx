@@ -4,7 +4,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import useTransaksiId from "@/hooks/transaksi/useGetTransaksi_id";
-import { useRouter } from "next/router";
 import { formatToIDR } from "@/helper/convertIDR";
 import {
   Receipt,
@@ -17,6 +16,7 @@ import {
   AlertCircle,
 } from "lucide-react";
 import { FORMAT_DATE } from "@/helper/convertTime";
+import CancelTransaksiButton from "@/components/views/Transaksi/CancelTransaksiButton";
 
 const getStatusColor = (status: string) => {
   switch (status.toLowerCase()) {
@@ -33,7 +33,6 @@ const getStatusColor = (status: string) => {
 
 const TransaksiDetail = () => {
   const { data, isLoading, error } = useTransaksiId();
-  const router = useRouter();
 
   if (isLoading) {
     return (
@@ -198,17 +197,10 @@ const TransaksiDetail = () => {
                         <Upload className="h-4 w-4 mr-2" />
                         Upload Payment Proof
                       </Button>
-
-                      <Button
-                        variant="neutral"
-                        className="w-full text-black"
-                        onClick={() => {
-                          /* Handle cancel */
-                        }}
-                      >
-                        <XCircle className="h-4 w-4 mr-2" />
-                        Cancel Transaction
-                      </Button>
+                      <CancelTransaksiButton
+                        transaksiId={data.id}
+                        invoiceId={data.invoiceId}
+                      />
                     </div>
                   </>
                 )}
