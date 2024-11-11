@@ -1,35 +1,20 @@
-import React from "react";
 import Layout from "@/components/Layout";
-import { Separator } from "@/components/ui/separator";
-import { formatToIDR } from "@/helper/convertIDR";
-import useActivityCategory from "@/hooks/useActivity_category";
-import useCaregoryId from "@/hooks/useCategory_id";
-import { useRouter } from "next/router";
-import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Star, Users, ArrowRight, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import useActivity from "@/components/views/Home/hooks/useActivity";
+import { formatToIDR } from "@/helper/convertIDR";
+import { ArrowRight, Loader2, MapPin, Star, Users } from "lucide-react";
+import { useRouter } from "next/router";
+import React from "react";
 
-const Category = () => {
-  const { data, isLoading, error } = useCaregoryId();
-  const { dataActivity, isLoadingActivity, errorActivity } =
-    useActivityCategory();
+const Activity = () => {
   const router = useRouter();
 
-  if (!router.isReady) {
-    return (
-      <Layout>
-        <div className="min-h-screen flex items-center justify-center">
-          <div className="flex items-center gap-2">
-            <Loader2 className="h-6 w-6 animate-spin" />
-            <span>Initializing...</span>
-          </div>
-        </div>
-      </Layout>
-    );
-  }
+  const { data, isLoading, error } = useActivity();
 
-  if (isLoading || isLoadingActivity) {
+  if (isLoading) {
     return (
       <Layout>
         <div className="min-h-screen flex items-center justify-center">
@@ -41,8 +26,7 @@ const Category = () => {
       </Layout>
     );
   }
-
-  if (error || errorActivity) {
+  if (error) {
     return (
       <Layout>
         <div className="min-h-screen flex items-center justify-center">
@@ -50,47 +34,33 @@ const Category = () => {
             <p className="text-xl font-semibold mb-2">
               Oops! Something went wrong
             </p>
-            <p>{error || errorActivity}</p>
+            <p>{error}</p>
           </div>
         </div>
       </Layout>
     );
   }
-
   return (
     <Layout>
-      <div className="mt-20 container mx-auto px-4 pb-10">
-        {data && (
-          <div className="relative mb-12">
-            <div className="relative h-[400px] rounded-2xl overflow-hidden mb-6">
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10" />
-              <img
-                src={data.imageUrl || "https://placehold.co/600x400/png"}
-                alt={data.name}
-                className="w-full h-full object-cover"
-                onError={(e) => {
-                  const img = e.target as HTMLImageElement;
-                  img.src = "https://placehold.co/600x400/png";
-                }}
-              />
-              <div className="absolute bottom-0 left-0 right-0 p-8 z-20">
-                <Badge className="mb-4" variant="secondary">
-                  Category
-                </Badge>
-                <h1 className="text-4xl font-bold text-white mb-2">
-                  {data.name}
-                </h1>
-                <p className="text-gray-200">
-                  Discover amazing activities in this category
-                </p>
-              </div>
-            </div>
-          </div>
-        )}
-
-        <Separator className="my-8" />
-
-        {dataActivity.length === 0 ? (
+      <div className="relative mt-20 h-52 overflow-hidden">
+        <img
+          src="https://img.freepik.com/free-photo/wet-vietnam-mountain-flow-stream-rural_1417-1357.jpg?t=st=1731054758~exp=1731058358~hmac=200cb015099ae4eb8e61af64caa8c871b4fde4d4852c20075580f0c85f5649c8&w=2000"
+          onError={(e) => {
+            const img = e.target as HTMLImageElement;
+            img.src = "https://placehold.co/600x400/png";
+          }}
+          className="w-full h-full object-cover rounded-b-lg mx-auto container"
+        />
+      </div>
+      <Separator className="mt-10 mx-auto container" />
+      <div className="my-10 mx-auto container">
+        <div className="mb-8">
+          <Badge variant="secondary" className="mb-4">
+            Promo Spesial
+          </Badge>
+          <h1 className="text-4xl font-bold mb-4">Jelajahi Perjalanan anda</h1>
+        </div>
+        {data.length === 0 ? (
           <div className="text-center py-12">
             <p className="text-xl text-gray-600">
               No activities found in this category
@@ -98,7 +68,7 @@ const Category = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {dataActivity.map((activity) => (
+            {data.map((activity) => (
               <div key={activity.id} className="h-full">
                 <Card className="h-full group ">
                   <div className="relative h-52 overflow-hidden">
@@ -160,4 +130,4 @@ const Category = () => {
   );
 };
 
-export default Category;
+export default Activity;

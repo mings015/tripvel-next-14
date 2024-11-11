@@ -25,4 +25,19 @@ export const END_POINT = {
   GET_ACTIVITIES: "/activities",
   GET_ACTIVITIES_BY_ID: "/activity",
   GET_ACTIVITIES_BY_CATEGORY: "/activities-by-category",
+
+  GET_CART: "/carts",
+  ADD_CART: "/add-cart",
+  UPDATE_CART: "/update-cart",
+  DELETE_CART: "/delete-cart",
+
+  GET_PAYMENT_METHOD: "/payment-methods",
+
+  CREATE_TRANSAKSI: "/create-transaction",
+  MY_TRANSAKSI: "/my-transactions",
+  MY_TRANSAKSI_BY_ID: "/transaction",
+  ALL_TRANSAKSI: "/all-transactions",
+  CANCEL_TRANSAKSI: "/cancel-transaction",
+  UPDATE_PAYMENT_PROOF: "/update-transaction-proof-payment",
+  UPDATE_TRANSAKSI_STATUS: "/update-transaction-status",
 };

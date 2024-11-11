@@ -3,18 +3,9 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-export interface Category {
-  id: string;
-  name: string;
-}
-export interface UrlImage {
-  url: string;
-}
-
 export interface ActivityItem {
   id: string;
-  category: Category;
-  imageUrls: string[];
+  imageUrls: string;
   title: string;
   description: string;
   price: number;
@@ -28,10 +19,10 @@ export interface ActivityItem {
   location_maps: string;
 }
 
-const useActivityId = () => {
-  const [data, setData] = useState<ActivityItem>();
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+const useActivityCategory = () => {
+  const [dataActivity, setData] = useState<ActivityItem[]>([]);
+  const [isLoadingActivity, setIsLoading] = useState(false);
+  const [errorActivity, setError] = useState<string | null>(null);
 
   const router = useRouter();
 
@@ -41,7 +32,7 @@ const useActivityId = () => {
 
     try {
       const response = await axios.get(
-        `${BASE_URL.API}${END_POINT.GET_ACTIVITIES_BY_ID}/${id}`,
+        `${BASE_URL.API}${END_POINT.GET_ACTIVITIES_BY_CATEGORY}/${id}`,
         {
           headers: {
             apiKey: API_KEY,
@@ -60,12 +51,12 @@ const useActivityId = () => {
   };
 
   useEffect(() => {
-    if (router.isReady && router.query.activity) {
-      getUsersList(router.query.activity as string);
+    if (router.isReady && router.query.category) {
+      getUsersList(router.query.category as string);
     }
-  }, [router.isReady, router.query.activity]);
+  }, [router.isReady, router.query.category]);
 
-  return { data, isLoading, error };
+  return { dataActivity, isLoadingActivity, errorActivity };
 };
 
-export default useActivityId;
+export default useActivityCategory;

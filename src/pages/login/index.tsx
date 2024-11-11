@@ -68,12 +68,19 @@ const LoginPage = () => {
           </div>
           <OrDevider />
           <LogoOptionLogin />
-          <p className="text-center text-sm md:pt-10 pb-10">
-            Dont have an account yet? {}
-            <Link className="text-primary" href={"/register"}>
-              Register here
+          <div className="md:pt-10 pb-10">
+            <Link href="/">
+              <p className="text-center text-sm mb-3 text-primary">
+                Continue as guest
+              </p>
             </Link>
-          </p>
+            <p className="text-center text-sm ">
+              Dont have an account yet? {}
+              <Link className="text-primary" href={"/register"}>
+                Register here
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
     </div>

@@ -7,24 +7,21 @@ export async function middleware(request: NextRequest) {
     const token = request.cookies.get("token")?.value;
     const path = request.nextUrl.pathname;
 
-    // Jika tidak ada token, redirect ke login
+    // Jika tidak ada token
     if (!token) {
       return NextResponse.redirect(new URL("/login", request.url));
     }
 
     const validation = await validateToken(token);
 
-    // Jika token tidak valid, redirect ke login
+    // Jika token tidak valid
     if (!validation.isValid) {
       console.error("Token validation failed:", validation.error);
       return NextResponse.redirect(new URL("/login", request.url));
     }
 
-    // Role-based access control
     if (validation.role === "user") {
-      // Jika user mencoba mengakses dashboard
       if (path.startsWith("/dashboard")) {
-        // Redirect ke halaman yang sesuai untuk user
         return NextResponse.redirect(new URL("/", request.url));
       }
     }
@@ -35,7 +32,7 @@ export async function middleware(request: NextRequest) {
       }
     }
 
-    // Jika semua validasi berhasil, lanjutkan request
+    // validasi berhasil
     return NextResponse.next();
   } catch (error) {
     console.error("Middleware error:", error);

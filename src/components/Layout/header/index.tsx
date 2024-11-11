@@ -38,7 +38,6 @@ import {
 } from "@/components/ui/alert-dialog";
 import { useState } from "react";
 import UseLogout from "@/hooks/useLogout";
-import { useToast } from "@/hooks/use-toast";
 import DialogEditProfile from "./components/DialogEditProfile";
 
 export default function Header() {
@@ -91,7 +90,7 @@ export default function Header() {
                   Contact Us
                 </Link>
                 <Link
-                  href="faqs"
+                  href="/faqs"
                   className="flex w-full items-center py-2 text-lg font-semibold"
                   prefetch={false}
                 >
@@ -134,7 +133,7 @@ export default function Header() {
               </NavigationMenuLink>
               <NavigationMenuLink asChild>
                 <Link
-                  href="faqs"
+                  href="/faqs"
                   className="group inline-flex h-9 w-max items-center justify-center px-4 py-2 text-sm font-medium transition-all hover:border-b-2 hover:border-black focus:border-b-2 focus:border-black dark:hover:border-white dark:focus:border-white outline-none"
                   prefetch={false}
                 >
@@ -156,7 +155,7 @@ export default function Header() {
               </Link>
             ) : (
               <div className="flex items-center space-x-4">
-                <Link href="faqs" className="pr-4">
+                <Link href="/user/cart" className="pr-4">
                   <Icon icon="mdi:cart-outline" fontSize={28} />
                 </Link>
 
@@ -176,7 +175,9 @@ export default function Header() {
                     <DropdownMenuItem onClick={() => setDialogOpen(true)}>
                       Edit
                     </DropdownMenuItem>
-                    <DropdownMenuItem>Transaksi</DropdownMenuItem>
+                    <DropdownMenuItem>
+                      <Link href="/user/transaksi">Transaksi</Link>
+                    </DropdownMenuItem>
                     <DropdownMenuItem onClick={() => setIsAlertOpen(true)}>
                       Logout
                     </DropdownMenuItem>
