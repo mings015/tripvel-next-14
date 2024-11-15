@@ -32,9 +32,35 @@ const routesMap: Record<string, RouteConfig> = {
     label: "My Cart",
     href: "/user/cart",
   },
+
+  dashboard: {
+    label: "Dashboard",
+    href: "/dashboard",
+  },
+  databanner: {
+    label: "Data Banner",
+    href: "/dashboard/banner",
+  },
+  datapromo: {
+    label: "Data Promo",
+    href: "/dashboard/promo",
+  },
+  datacategory: {
+    label: "Data Category",
+    href: "/dashboard/category/",
+  },
+
+  dataactivity: {
+    label: "Data Activity",
+    href: "/dashboard/activity",
+  },
   transaksi: {
-    label: "My Transaction",
-    href: "/user/transaksi",
+    label: "Data Transaksi",
+    href: "/dashboard/transaksi",
+  },
+  users: {
+    label: "Data Users",
+    href: "/dashboard/users/",
   },
 };
 

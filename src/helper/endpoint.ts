@@ -11,16 +11,28 @@ export const END_POINT = {
 
   GET_LOGGED_USER: "/user",
   UPDATE_PROFILE: "/update-profile",
+  GET_ALL_USER: "/all-user",
+  UPDATE_USER_ROLE: "/update-user-role",
+
   UPLOAD_IMAGE: "/upload-image",
 
   GET_PROMO: "/promos",
   GET_PROMO_BY_ID: "/promo",
+  EDIT_PROMO: "/update-promo",
+  DELETE_PROMO: "/delete-promo",
+  CREATE_PROMO: "/create-promo",
 
   GET_BANNER: "/banners",
   GET_BANNER_BY_ID: "/banner",
+  DELETE_BANNER: "/delete-banner",
+  EDIT_BANNER: "/update-banner",
+  CREATE_BANNER: "/create-banner",
 
   GET_CATEGORY: "/categories",
   GET_CATEGORY_BY_ID: "/category",
+  DELETE_CATEGORY: "/delete-category",
+  EDIT_CATEGORY: "/update-category",
+  CREATE_CATEGORY: "/create-category",
 
   GET_ACTIVITIES: "/activities",
   GET_ACTIVITIES_BY_ID: "/activity",

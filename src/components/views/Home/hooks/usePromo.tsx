@@ -1,6 +1,6 @@
 import { API_KEY, BASE_URL, END_POINT } from "@/helper/endpoint";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import useSWR from "swr";
 
 export interface PromoItem {
   id: string;
@@ -11,41 +11,78 @@ export interface PromoItem {
   promo_code: string;
   promo_discount_price: number;
   minimum_claim_price: number;
+  createdAt: string;
+  updatedAt: string;
 }
 
-const usePromo = () => {
-  const [data, setData] = useState<PromoItem[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+interface ApiResponse {
+  status: string;
+  message: string;
+  data: PromoItem[];
+}
 
-  const getUsersList = async () => {
-    setIsLoading(true);
-    setError(null);
-    try {
-      const response = await axios.get(
-        `${BASE_URL.API}${END_POINT.GET_PROMO}`,
-        {
-          headers: {
-            apiKey: API_KEY,
-          },
-        }
-      );
-      setData(response.data.data);
-    } catch (error: any) {
-      setError(
-        error.response?.data?.message ||
-          "An error occurred while fetching users."
-      );
-    } finally {
-      setIsLoading(false);
+const fetcher = async (url: string): Promise<PromoItem[]> => {
+  const response = await axios.get<ApiResponse>(url, {
+    headers: {
+      apiKey: API_KEY,
+    },
+  });
+  return response.data.data;
+};
+
+const usePromo = () => {
+  //   const [data, setData] = useState<PromoItem[]>([]);
+  //   const [isLoading, setIsLoading] = useState(false);
+  //   const [error, setError] = useState<string | null>(null);
+
+  const { data, error, isLoading, mutate } = useSWR<PromoItem[]>(
+    `${BASE_URL.API}${END_POINT.GET_PROMO}`,
+    fetcher,
+    {
+      revalidateOnFocus: false,
+      dedupingInterval: 5000,
+      errorRetryCount: 3,
     }
+  );
+
+  const refreshPromo = async () => {
+    await mutate();
   };
 
-  useEffect(() => {
-    getUsersList();
-  }, []);
+  //   const getUsersList = async () => {
+  //     setIsLoading(true);
+  //     setError(null);
+  //     try {
+  //       const response = await axios.get(
+  //         `${BASE_URL.API}${END_POINT.GET_PROMO}`,
+  //         {
+  //           headers: {
+  //             apiKey: API_KEY,
+  //           },
+  //         }
+  //       );
+  //       setData(response.data.data);
+  //     } catch (error: any) {
+  //       setError(
+  //         error.response?.data?.message ||
+  //           "An error occurred while fetching users."
+  //       );
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   };
 
-  return { data, isLoading, error };
+  //   useEffect(() => {
+  //     getUsersList();
+  //   }, []);
+
+  return {
+    data: data || [],
+    isLoading,
+    error: error?.message || null,
+    mutate,
+    refreshPromo,
+  };
 };
 
 export default usePromo;

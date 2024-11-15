@@ -9,7 +9,7 @@ export interface BannerItem {
   name: string;
 }
 
-const useBannerId = () => {
+const useBannerId = (bannerId?: string) => {
   const [data, setData] = useState<BannerItem>();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);

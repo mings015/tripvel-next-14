@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Home } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React from "react";
 
 interface BreadcrumbItemType {
@@ -21,18 +22,23 @@ interface CustomBreadcrumbProps {
 }
 
 export function CustomBreadcrumb({ items, className }: CustomBreadcrumbProps) {
+  const pathname = usePathname();
+  const isDashboardPath = pathname?.startsWith("/dashboard/");
+
   return (
     <Breadcrumb className={className}>
       <BreadcrumbList>
         {/* Home Item */}
-        <BreadcrumbItem>
-          <BreadcrumbLink asChild>
-            <Link href="/" className="flex items-center gap-2">
-              <Home className="h-4 w-4" />
-              <span>Home</span>
-            </Link>
-          </BreadcrumbLink>
-        </BreadcrumbItem>
+        {!isDashboardPath && (
+          <BreadcrumbItem>
+            <BreadcrumbLink asChild>
+              <Link href="/" className="flex items-center gap-2">
+                <Home className="h-4 w-4" />
+                <span>Home</span>
+              </Link>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+        )}
 
         {/* Map through other items */}
         {items.map((item, index) => (
