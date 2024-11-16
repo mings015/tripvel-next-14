@@ -19,13 +19,33 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { Pencil } from "lucide-react";
+import UpdateRoleDialog from "@/components/views/dashboard/users/UpdateRoleDialog";
+import UseUpdateRole from "@/hooks/dashboard/user/useUpdateRole";
 
 const ITEMS_PER_PAGE = 10;
 
 const UsersDashboard = () => {
-  const { data, isLoading, error } = UseGetAllUser();
+  const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
+  const [isUpdateDialogOpen, setIsUpdateDialogOpen] = useState(false);
+  const [loading, setIsLoading] = useState(false);
+
+  const updateUserRole = UseUpdateRole();
+
+  const handleUpdateRole = async (newRole: string) => {
+    if (!selectedUserId) return;
+
+    setIsLoading(true);
+    const success = await updateUserRole(selectedUserId, { role: newRole });
+
+    if (success) {
+      setIsUpdateDialogOpen(false);
+      mutate();
+    }
+
+    setIsLoading(false);
+  };
+
+  const { data, isLoading, error, mutate } = UseGetAllUser();
   const [currentPage, setCurrentPage] = useState(1);
 
   const totalPages = data ? Math.ceil(data.length / ITEMS_PER_PAGE) : 0;
@@ -107,7 +127,6 @@ const UsersDashboard = () => {
                   <TableHead>Image</TableHead>
                   <TableHead>Name</TableHead>
                   <TableHead>Email</TableHead>
-                  <TableHead>Role</TableHead>
                   <TableHead>Nomor Hp</TableHead>
                   <TableHead className="text-right">Actions</TableHead>
                 </TableRow>
@@ -135,17 +154,27 @@ const UsersDashboard = () => {
                     <TableCell className="font-medium">
                       {userList.email}
                     </TableCell>
-                    <TableCell className="font-medium">
-                      {userList.role}
-                    </TableCell>
-                    <TableCell className="font-medium">
-                      {userList.phoneNumber}
-                    </TableCell>
+
+                    <TableCell className="font-medium">{userList.id}</TableCell>
                     <TableCell className="text-right">
                       <div className="flex justify-end gap-2">
-                        <Button variant="variant" size="icon">
-                          <Pencil className="h-4 w-4" />
-                        </Button>
+                        <UpdateRoleDialog
+                          userId={userList.id}
+                          currentRole={userList.role}
+                          isLoading={loading && selectedUserId === userList.id}
+                          isDialogOpen={
+                            isUpdateDialogOpen && selectedUserId === userList.id
+                          }
+                          setDialogOpen={(open) => {
+                            setIsUpdateDialogOpen(open);
+                            if (open) {
+                              setSelectedUserId(userList.id);
+                            } else {
+                              setSelectedUserId(null);
+                            }
+                          }}
+                          onUpdate={handleUpdateRole}
+                        />
                       </div>
                     </TableCell>
                   </TableRow>
