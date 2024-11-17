@@ -5,19 +5,73 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Pencil, Plus } from "lucide-react";
 import { TableSkeleton } from "@/components/content/Skeleton";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 import { FORMAT_DATE } from "@/helper/convertTime";
 import DeleteCategoryAlert from "@/hooks/dashboard/category/deleteCategoryAlert";
+import { DataTable } from "@/components/ui/data-table";
+import { ColumnDef } from "@tanstack/react-table";
+
+// Definisikan interface untuk tipe data category
+interface Category {
+  id: string;
+  name: string;
+  imageUrl: string;
+  createdAt: string;
+  updatedAt: string;
+}
 
 const CategoryDashboard = () => {
   const { data, isLoading, error } = useCategory();
+
+  // Definisikan kolom-kolom untuk tabel
+  const columns: ColumnDef<Category>[] = [
+    {
+      accessorKey: "imageUrl",
+      header: "Image",
+      cell: ({ row }) => {
+        return (
+          <img
+            src={row.original.imageUrl}
+            alt={row.original.name}
+            className="w-36 h-20 object-cover rounded"
+          />
+        );
+      },
+    },
+    {
+      accessorKey: "name",
+      header: "Name",
+      cell: ({ row }) => (
+        <span className="font-medium">{row.getValue("name")}</span>
+      ),
+    },
+    {
+      accessorKey: "createdAt",
+      header: "Created At",
+      cell: ({ row }) => FORMAT_DATE(row.getValue("createdAt")),
+    },
+    {
+      accessorKey: "updatedAt",
+      header: "Updated At",
+      cell: ({ row }) => FORMAT_DATE(row.getValue("updatedAt")),
+    },
+    {
+      id: "actions",
+      header: () => <div className="text-right">Actions</div>,
+      cell: ({ row }) => {
+        const category = row.original;
+        return (
+          <div className="flex justify-end gap-2">
+            <Link href={`/dashboard/category/${category.id}`}>
+              <Button variant="variant" size="icon">
+                <Pencil className="h-4 w-4" />
+              </Button>
+            </Link>
+            <DeleteCategoryAlert categoryId={category.id} />
+          </div>
+        );
+      },
+    },
+  ];
 
   return (
     <DashboardLayout>
@@ -37,47 +91,11 @@ const CategoryDashboard = () => {
           </div>
           {isLoading && <TableSkeleton />}
           {error && <div>{error}</div>}
-          <div>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Image</TableHead>
-                  <TableHead>Name</TableHead>
-                  <TableHead>Created At</TableHead>
-                  <TableHead>Updated At</TableHead>
-                  <TableHead className="text-right">Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {data.map((category) => (
-                  <TableRow key={category.id}>
-                    <TableCell>
-                      <img
-                        src={category.imageUrl}
-                        alt={category.name}
-                        className="w-36 h-20 object-cover rounded"
-                      />
-                    </TableCell>
-                    <TableCell className="font-medium">
-                      {category.name}
-                    </TableCell>
-                    <TableCell>{FORMAT_DATE(category.createdAt)}</TableCell>
-                    <TableCell>{FORMAT_DATE(category.updatedAt)}</TableCell>
-                    <TableCell className="text-right">
-                      <div className="flex justify-end gap-2">
-                        <Link href={`/dashboard/category/${category.id}`}>
-                          <Button variant="variant" size="icon">
-                            <Pencil className="h-4 w-4" />
-                          </Button>
-                        </Link>
-                        <DeleteCategoryAlert categoryId={category.id} />
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
+          {data && (
+            <div className="space-y-4">
+              <DataTable columns={columns} data={data} />
+            </div>
+          )}
         </div>
       </div>
     </DashboardLayout>

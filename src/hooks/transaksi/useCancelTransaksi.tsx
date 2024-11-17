@@ -37,7 +37,8 @@ const UseCancelTransaksi = () => {
           title: "Success",
           description: response.data.message,
         });
-        router.push("/user/transaksi");
+        // router.push("/user/transaksi");
+        window.location.reload();
       } else {
         toast({
           title: "Error",

@@ -82,6 +82,43 @@ export function Dashboard() {
                 </div>
               </CardContent>
             </Card>
+
+            <Card>
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm text-gray-500">
+                      Data Perlu Konfirmasi
+                    </p>
+                    <p className="text-2xl font-bold">1000</p>
+                  </div>
+                  <CreditCard className="h-8 w-8 text-gray-400" />
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm text-gray-500">Data User</p>
+                    <p className="text-2xl font-bold">1000</p>
+                  </div>
+                  <CreditCard className="h-8 w-8 text-gray-400" />
+                </div>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm text-gray-500">Data Admin</p>
+                    <p className="text-2xl font-bold">1000</p>
+                  </div>
+                  <CreditCard className="h-8 w-8 text-gray-400" />
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </div>

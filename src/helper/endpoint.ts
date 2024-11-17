@@ -37,6 +37,9 @@ export const END_POINT = {
   GET_ACTIVITIES: "/activities",
   GET_ACTIVITIES_BY_ID: "/activity",
   GET_ACTIVITIES_BY_CATEGORY: "/activities-by-category",
+  DELETE_ACTIVITY: "/delete-activity",
+  EDIT_ACTIVITY: "/update-activity",
+  CREATE_ACTIVITY: "/create-activity",
 
   GET_CART: "/carts",
   ADD_CART: "/add-cart",

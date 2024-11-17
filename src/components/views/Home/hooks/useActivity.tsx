@@ -1,9 +1,19 @@
 import { API_KEY, BASE_URL, END_POINT } from "@/helper/endpoint";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import useSWR from "swr";
+
+export interface CategoryItem {
+  id: string;
+  imageUrl: string;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+}
 
 export interface ActivityItem {
   id: string;
+  category: CategoryItem;
   imageUrls: string;
   title: string;
   description: string;
@@ -16,41 +26,52 @@ export interface ActivityItem {
   province: string;
   city: string;
   location_maps: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
-const useActivity = () => {
-  const [data, setData] = useState<ActivityItem[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+interface ApiResponse {
+  status: string;
+  message: string;
+  data: ActivityItem[];
+}
 
-  const getUsersList = async () => {
-    setIsLoading(true);
-    setError(null);
-    try {
-      const response = await axios.get(
-        `${BASE_URL.API}${END_POINT.GET_ACTIVITIES}`,
-        {
-          headers: {
-            apiKey: API_KEY,
-          },
-        }
-      );
-      setData(response.data.data);
-    } catch (error: any) {
-      setError(
-        error.response?.data?.message ||
-          "An error occurred while fetching users."
-      );
-    } finally {
-      setIsLoading(false);
+const fetcher = async (url: string): Promise<ActivityItem[]> => {
+  const token = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith("token="))
+    ?.split("=")[1];
+  const response = await axios.get<ApiResponse>(url, {
+    headers: {
+      apiKey: API_KEY,
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data.data;
+};
+
+const useActivity = () => {
+  const { data, error, isLoading, mutate } = useSWR<ActivityItem[]>(
+    `${BASE_URL.API}${END_POINT.GET_ACTIVITIES}`,
+    fetcher,
+    {
+      revalidateOnFocus: false,
+      dedupingInterval: 5000,
+      errorRetryCount: 3,
     }
+  );
+
+  const refreshActivity = async () => {
+    await mutate();
   };
 
-  useEffect(() => {
-    getUsersList();
-  }, []);
-
-  return { data, isLoading, error };
+  return {
+    data: data || [],
+    isLoading,
+    error: error?.message || null,
+    mutate,
+    refreshActivity,
+  };
 };
 
 export default useActivity;

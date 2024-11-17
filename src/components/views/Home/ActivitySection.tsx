@@ -44,7 +44,7 @@ const ActivitySection = () => {
                   <Card className="h-full group ">
                     <div className="relative h-52 overflow-hidden">
                       <img
-                        src={activity.imageUrls}
+                        src={activity.imageUrls[0]}
                         alt={activity.title}
                         className="w-full h-full object-cover rounded-t-lg"
                       />
