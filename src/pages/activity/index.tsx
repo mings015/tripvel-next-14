@@ -5,18 +5,53 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CustomBreadcrumb } from "@/components/ui/custom-breadcrumb";
 import { Separator } from "@/components/ui/separator";
+import { Input } from "@/components/ui/input";
 import useActivity from "@/components/views/Home/hooks/useActivity";
 import { formatToIDR } from "@/helper/convertIDR";
 import { useBreadcrumb } from "@/hooks/useBreadcrumb";
-import { ArrowRight, Loader2, MapPin, Star, Users } from "lucide-react";
+import { ArrowRight, MapPin, Search, Star, Users } from "lucide-react";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState, useMemo, useEffect } from "react";
 
 const Activity = () => {
   const router = useRouter();
   const breadcrumbItems = useBreadcrumb();
-
   const { data, isLoading, error } = useActivity();
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // Sync URL search parameter with local state
+  useEffect(() => {
+    const { search } = router.query;
+    if (search) {
+      setSearchQuery(decodeURIComponent(search as string));
+    }
+  }, [router.query]);
+
+  // Handle search input change
+  const handleSearchChange = (e: any) => {
+    const newQuery = e.target.value;
+    setSearchQuery(newQuery);
+
+    // Update URL without triggering a page reload
+    const newUrl = newQuery
+      ? `/activity?search=${encodeURIComponent(newQuery)}`
+      : "/activity";
+    router.replace(newUrl, undefined, { shallow: true });
+  };
+
+  // Filter data berdasarkan search query
+  const filteredData = useMemo(() => {
+    if (!data) return [];
+
+    const query = searchQuery.toLowerCase().trim();
+    if (!query) return data;
+
+    return data.filter(
+      (activity) =>
+        activity.title.toLowerCase().includes(query) ||
+        activity.city.toLowerCase().includes(query)
+    );
+  }, [data, searchQuery]);
 
   if (isLoading) {
     return (
@@ -28,6 +63,7 @@ const Activity = () => {
       </Layout>
     );
   }
+
   if (error) {
     return (
       <Layout>
@@ -42,6 +78,7 @@ const Activity = () => {
       </Layout>
     );
   }
+
   return (
     <Layout>
       <div className="relative mt-20 h-52 overflow-hidden">
@@ -66,18 +103,33 @@ const Activity = () => {
             <h1 className="text-4xl font-bold mb-4">
               Jelajahi Perjalanan anda
             </h1>
+
+            {/* Search Input */}
+            <div className="relative mb-6">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+              <Input
+                type="text"
+                placeholder="Cari berdasarkan judul atau kota..."
+                value={searchQuery}
+                onChange={handleSearchChange}
+                className="pl-10 w-full"
+              />
+            </div>
           </div>
-          {data.length === 0 ? (
+
+          {filteredData.length === 0 ? (
             <div className="text-center py-12">
               <p className="text-xl text-gray-600">
-                No activities found in this category
+                {searchQuery
+                  ? "Tidak ada aktivitas yang sesuai dengan pencarian Anda"
+                  : "Tidak ada aktivitas yang tersedia"}
               </p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {data.map((activity) => (
+              {filteredData.map((activity) => (
                 <div key={activity.id} className="h-full">
-                  <Card className="h-full group ">
+                  <Card className="h-full group">
                     <div className="relative h-52 overflow-hidden">
                       <img
                         src={activity.imageUrls[0]}

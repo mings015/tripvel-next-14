@@ -1,10 +1,21 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useState } from "react";
 import { Icon } from "@iconify/react";
 
 const HeroSection = () => {
+  const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearch = (e: any) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      router.push(`/activity?search=${encodeURIComponent(searchQuery.trim())}`);
+    }
+  };
+
   return (
     <div className="relative">
       <Image
@@ -21,10 +32,12 @@ const HeroSection = () => {
             <h1 className="scroll-m-20 text-3xl font-extrabold tracking-tight lg:text-4xl text-secondaryBlack text-center pb-5">
               Halo, Perjalanan Anda Dimulai Dari Sini
             </h1>
-            <div className="flex w-full gap-2 my-5">
+            <form onSubmit={handleSearch} className="flex w-full gap-2 my-5">
               <div className="w-full">
                 <Input
                   type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Cari tujuan perjalanan mu"
                   className="w-full text-lg h-14"
                 />
@@ -34,7 +47,7 @@ const HeroSection = () => {
                   Cari
                 </Button>
               </div>
-            </div>
+            </form>
             <div className="flex items-center justify-center gap-2">
               <p className="flex gap-2 justify-center items-center">
                 <span>
