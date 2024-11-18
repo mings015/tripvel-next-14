@@ -2,13 +2,13 @@
 
 import * as React from "react";
 import {
-  BookOpen,
-  Command,
   Frame,
-  GalleryVerticalEnd,
-  PieChart,
   Users,
-  SquareTerminal,
+  ShoppingCart,
+  Image,
+  LayoutGrid,
+  Tag,
+  MapPin,
 } from "lucide-react";
 import {
   Sidebar,
@@ -31,27 +31,27 @@ const data = {
     {
       name: "Data Banner",
       url: "/dashboard/banner",
-      icon: BookOpen,
+      icon: Image,
     },
     {
       name: "Data Promo",
       url: "/dashboard/promo",
-      icon: PieChart,
+      icon: Tag,
     },
     {
       name: "Data Category",
       url: "/dashboard/category",
-      icon: SquareTerminal,
+      icon: LayoutGrid,
     },
     {
       name: "Data Activity",
       url: "/dashboard/activity",
-      icon: GalleryVerticalEnd,
+      icon: MapPin,
     },
     {
       name: "Data Transaksi",
       url: "/dashboard/transaksi",
-      icon: Command,
+      icon: ShoppingCart,
     },
     {
       name: "Data User",
