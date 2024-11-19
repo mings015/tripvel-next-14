@@ -45,13 +45,13 @@ const StatusBadge = ({ status }: { status: string }) => {
 
 const TransaksiDetail = () => {
   const { data, isLoading, error } = useTransaksiId();
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [selectedTransaksiId, setSelectedTransaksiId] = useState<string>("");
+  //   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  //   const [selectedTransaksiId, setSelectedTransaksiId] = useState<string>("");
 
-  const handleUploadClick = (transaksiId: string) => {
-    setSelectedTransaksiId(transaksiId);
-    setIsDialogOpen(true);
-  };
+  //   const handleUploadClick = (transaksiId: string) => {
+  //     setSelectedTransaksiId(transaksiId);
+  //     setIsDialogOpen(true);
+  //   };
 
   if (isLoading) return <DashboardSkeleton />;
   if (error) {

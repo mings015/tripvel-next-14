@@ -2,7 +2,6 @@ import { API_KEY, BASE_URL, END_POINT } from "@/helper/endpoint";
 import axios from "axios";
 import { useState } from "react";
 import { toast } from "../use-toast";
-import { useRouter } from "next/router";
 
 interface CancelTransaksiResponse {
   code: string;
