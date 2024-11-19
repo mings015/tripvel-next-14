@@ -1,5 +1,6 @@
 import axios, { AxiosError } from "axios";
 import { API_KEY, BASE_URL, END_POINT } from "../helper/endpoint";
+import { ApiResponse } from "../types/api";
 
 interface ValidationResponse {
   isValid: boolean;

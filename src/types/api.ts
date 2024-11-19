@@ -7,7 +7,7 @@ interface UserData {
   phoneNumber: string;
 }
 
-interface ApiResponse {
+export interface ApiResponse {
   code: string;
   status: string;
   message: string;
