@@ -126,6 +126,7 @@ const useAddActivity = () => {
           setUploadProgress(Math.round(progress));
         }
       } catch (error) {
+        console.error(error);
         toast({
           variant: "destructive",
           title: "Error",

@@ -34,7 +34,8 @@ const DeleteCartButton: React.FC<DeleteCartButtonProps> = ({
       setIsAlertOpen(false);
       onSuccess?.();
       refreshCart();
-    } catch (error) {
+    } catch (error: any) {
+      console.error("Failed to delete cart item:", error.message);
       setIsAlertOpen(false);
     }
   };

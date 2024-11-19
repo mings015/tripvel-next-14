@@ -7,7 +7,6 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import Image from "next/image";
 import useBanner from "./hooks/useBanner";
 import Link from "next/link";
 import { CardSkeleton } from "@/components/content/Skeleton";

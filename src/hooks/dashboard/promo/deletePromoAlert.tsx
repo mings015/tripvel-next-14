@@ -80,6 +80,7 @@ const DeletePromoAlert: React.FC<DeleteButtonProps> = ({
       return false;
     } finally {
       setIsLoading(false);
+      console.log(isSuccess);
     }
   };
   return (

@@ -1,4 +1,3 @@
-// contexts/UserContext.tsx
 import React, { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { API_KEY, BASE_URL, END_POINT } from "../helper/endpoint";
@@ -51,6 +50,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         setUser(response.data.data);
       }
     } catch (err) {
+      console.error(err);
       setError("Failed to fetch user data");
     } finally {
       setLoading(false);

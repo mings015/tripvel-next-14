@@ -1,14 +1,16 @@
 "use client";
 
+import Image from "next/image";
+
 import * as React from "react";
 import {
   Frame,
   Users,
   ShoppingCart,
-  Image,
   LayoutGrid,
   Tag,
   MapPin,
+  ImageMinus,
 } from "lucide-react";
 import {
   Sidebar,
@@ -31,7 +33,7 @@ const data = {
     {
       name: "Data Banner",
       url: "/dashboard/banner",
-      icon: Image,
+      icon: ImageMinus,
     },
     {
       name: "Data Promo",
@@ -65,7 +67,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <img src="/logo.svg" className="h-16"></img>
+        <Image
+          src="/logo.svg"
+          alt="Profile Preview"
+          width={64}
+          height={64}
+          priority={true}
+          className="w-fit mt-6"
+        />
       </SidebarHeader>
       <SidebarContent>
         <NavProjects projects={data.projects} />

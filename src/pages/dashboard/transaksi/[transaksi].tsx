@@ -1,5 +1,3 @@
-import Layout from "@/components/Layout";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
@@ -9,22 +7,16 @@ import { formatToIDR } from "@/helper/convertIDR";
 import {
   Receipt,
   Clock,
-  Upload,
-  Loader2,
   Calendar,
   AlertCircle,
   User,
   FileText,
-  Clock3,
   History,
 } from "lucide-react";
 import { FORMAT_DATE } from "@/helper/convertTime";
 import CancelTransaksiButton from "@/components/views/Transaksi/CancelTransaksiButton";
 import { useState } from "react";
-import UploadProofPaymentDialog from "@/components/views/Transaksi/UploadProofPaymentDialog";
 import { DashboardSkeleton } from "@/components/content/Skeleton";
-import { CustomBreadcrumb } from "@/components/ui/custom-breadcrumb";
-import { useBreadcrumb } from "@/hooks/useBreadcrumb";
 import DashboardLayout from "@/components/dashboard/components/DashboardLayout";
 import UpdateStatusButton from "@/hooks/dashboard/transaksi/updateStatusTransaksi";
 

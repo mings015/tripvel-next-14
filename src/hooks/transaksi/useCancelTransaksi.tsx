@@ -12,7 +12,6 @@ interface CancelTransaksiResponse {
 
 const UseCancelTransaksi = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
 
   const cancelTransaksi = async (transaksiId: string) => {
     try {

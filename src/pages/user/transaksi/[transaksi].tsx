@@ -8,9 +8,7 @@ import { formatToIDR } from "@/helper/convertIDR";
 import {
   Receipt,
   Clock,
-  CreditCard,
   Upload,
-  XCircle,
   Loader2,
   Calendar,
   AlertCircle,

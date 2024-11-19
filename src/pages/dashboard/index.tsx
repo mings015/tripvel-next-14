@@ -1,5 +1,4 @@
 import DashboardLayout from "@/components/dashboard/components/DashboardLayout";
-import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import useActivity from "@/components/views/Home/hooks/useActivity";
 import useBanner from "@/components/views/Home/hooks/useBanner";
@@ -21,41 +20,18 @@ import {
 } from "lucide-react";
 
 export function Dashboard() {
-  const {
-    data: dataBanner,
-    isLoading: isLoadingBanner,
-    error: errorBanner,
-  } = useBanner();
+  const { data: dataBanner, isLoading: isLoadingBanner } = useBanner();
 
-  const {
-    data: dataPromo,
-    isLoading: isLoadingPromo,
-    error: errorPromo,
-  } = usePromo();
+  const { data: dataPromo, isLoading: isLoadingPromo } = usePromo();
 
-  const {
-    data: dataCategory,
-    isLoading: isLoadingCategory,
-    error: errorCategory,
-  } = useCategory();
+  const { data: dataCategory, isLoading: isLoadingCategory } = useCategory();
 
-  const {
-    data: dataActivity,
-    isLoading: isLoadingActivity,
-    error: errorActivity,
-  } = useActivity();
+  const { data: dataActivity, isLoading: isLoadingActivity } = useActivity();
 
-  const {
-    data: dataTransaksi,
-    isLoading: isLoadingTransaksi,
-    error: errorTransaksi,
-  } = UseGetAllTransaksi();
+  const { data: dataTransaksi, isLoading: isLoadingTransaksi } =
+    UseGetAllTransaksi();
 
-  const {
-    data: dataUsers,
-    isLoading: isLoadingUsers,
-    error: errorUsers,
-  } = UseGetAllUser();
+  const { data: dataUsers, isLoading: isLoadingUsers } = UseGetAllUser();
 
   // Hitung transaksi yang perlu konfirmasi (status pending)
   const pendingTransactions =
@@ -101,9 +77,6 @@ export function Dashboard() {
         <div>
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-2xl font-bold">Dashboard</h1>
-            <Badge variant="outline" className="font-normal">
-              {new Date().toLocaleDateString()}
-            </Badge>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 my-8">
             <Card>

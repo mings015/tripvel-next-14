@@ -74,6 +74,7 @@ const useEditPromo = () => {
       const imageUrl = await uploadImage(file);
       return imageUrl;
     } catch (error) {
+      console.error(error);
       toast({
         variant: "destructive",
         title: "Error",

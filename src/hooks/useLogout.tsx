@@ -62,6 +62,7 @@ const UseLogout = () => {
   return {
     isLoading,
     handleLogout,
+    success,
   };
 };
 

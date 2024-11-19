@@ -1,7 +1,6 @@
 import { API_KEY, BASE_URL, END_POINT } from "@/helper/endpoint";
 import axios from "axios";
-import React, { useState } from "react";
-import { toast } from "./use-toast";
+import { useState } from "react";
 
 interface UploadImageResponse {
   code: string;

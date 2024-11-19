@@ -1,7 +1,7 @@
 import Layout from "@/components/Layout";
 import usePromoId from "@/hooks/usePromo_id";
 import { useRouter } from "next/router";
-import { Calendar, Clock, Copy, Share2, Tag } from "lucide-react";
+import { Calendar, Copy, Share2, Tag } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";

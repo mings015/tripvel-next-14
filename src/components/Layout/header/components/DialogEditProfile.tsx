@@ -16,6 +16,7 @@ import axios from "axios";
 import { API_KEY, BASE_URL, END_POINT } from "@/helper/endpoint";
 import { useToast } from "@/hooks/use-toast";
 import UseUploadImage from "@/hooks/useUploadImage";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 interface DialogProps {
   isOpen: boolean;
@@ -163,7 +164,7 @@ const DialogEditProfile: React.FC<DialogProps> = ({ isOpen, onOpenChange }) => {
         <DialogHeader>
           <DialogTitle>Edit profile</DialogTitle>
           <DialogDescription>
-            Make changes to your profile here. Click save when you're done.
+            Make changes to your profile here. Click save when you&apos;re done.
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit}>
@@ -172,11 +173,10 @@ const DialogEditProfile: React.FC<DialogProps> = ({ isOpen, onOpenChange }) => {
               <div className="grid grid-cols-4 items-center gap-4">
                 <div className="col-span-4 flex justify-center">
                   <div className="relative">
-                    <img
-                      src={formData.profilePictureUrl}
-                      alt="Profile Preview"
-                      className="w-32 h-32 rounded-full object-cover"
-                    />
+                    <Avatar className="h-32 w-32">
+                      <AvatarImage src={formData.profilePictureUrl} alt="#" />
+                      <AvatarFallback>CN</AvatarFallback>
+                    </Avatar>
                     {uploadProgress > 0 && uploadProgress < 100 && (
                       <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-full">
                         <span className="text-white">{uploadProgress}%</span>

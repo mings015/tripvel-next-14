@@ -28,9 +28,9 @@ import { CustomBreadcrumb } from "@/components/ui/custom-breadcrumb";
 
 const Cart = () => {
   const breadcrumbItems = useBreadcrumb();
-  const { data, isLoadingCart, errorCart, refreshCart } = useGetCart();
+  const { data, isLoadingCart, errorCart } = useGetCart();
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
-  const { ListPayment, isLoading, error } = PaymentMethod();
+  const { ListPayment } = PaymentMethod();
   const [selectedPayment, setSelectedPayment] = useState<string>(""); // State untuk menyimpan ID payment yang dipilih
 
   if (isLoadingCart) {
@@ -127,7 +127,7 @@ const Cart = () => {
                   Your cart is empty
                 </h2>
                 <p className="text-gray-500 mb-6">
-                  Look like you haven't added anything to your cart yet
+                  Look like you havent added anything to your cart yet
                 </p>
                 <Link href="/activity">
                   <Button>Start Shopping</Button>

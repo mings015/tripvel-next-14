@@ -1,6 +1,5 @@
 import { API_KEY, BASE_URL, END_POINT } from "@/helper/endpoint";
 import axios from "axios";
-import { useEffect, useState } from "react";
 import useSWR from "swr";
 
 export interface CategoryItem {

@@ -83,6 +83,7 @@ const useGetCart = () => {
       });
       await mutate();
     } catch (error) {
+      console.error("Failed to update cart:");
       await mutate();
     }
   };

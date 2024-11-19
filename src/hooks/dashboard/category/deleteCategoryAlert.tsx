@@ -81,6 +81,7 @@ const DeleteCategoryAlert: React.FC<DeleteButtonProps> = ({
       return false;
     } finally {
       setIsLoading(false);
+      console.log(isSuccess);
     }
   };
 

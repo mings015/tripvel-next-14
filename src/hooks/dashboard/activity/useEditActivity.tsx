@@ -96,6 +96,7 @@ const useEditActivity = () => {
 
       return uploadedUrls;
     } catch (error) {
+      console.error(error);
       toast({
         variant: "destructive",
         title: "Error",

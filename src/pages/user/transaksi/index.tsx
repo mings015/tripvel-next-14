@@ -22,8 +22,6 @@ import {
 import { FORMAT_DATE } from "@/helper/convertTime";
 import Link from "next/link";
 import { TableSkeleton } from "@/components/content/Skeleton";
-import { useBreadcrumb } from "@/hooks/useBreadcrumb";
-import { CustomBreadcrumb } from "@/components/ui/custom-breadcrumb";
 
 const getStatusColor = (status: string) => {
   switch (status.toLowerCase()) {

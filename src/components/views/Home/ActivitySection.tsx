@@ -1,5 +1,4 @@
 import TitleMain from "@/components/content/titleMain";
-import Image from "next/image";
 import { Icon } from "@iconify/react";
 import useActivity from "./hooks/useActivity";
 import { formatToIDR } from "@/helper/convertIDR";

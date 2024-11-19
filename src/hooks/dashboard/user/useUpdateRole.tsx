@@ -55,6 +55,7 @@ const UseUpdateRole = () => {
       return false;
     } finally {
       setIsLoading(false);
+      console.log(isLoading);
     }
   };
 

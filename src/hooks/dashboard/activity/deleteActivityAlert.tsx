@@ -82,6 +82,7 @@ const DeleteActivityAlert: React.FC<DeleteButtonProps> = ({
       return false;
     } finally {
       setIsLoading(false);
+      console.log(isSuccess);
     }
   };
 
