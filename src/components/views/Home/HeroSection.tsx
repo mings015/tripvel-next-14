@@ -19,12 +19,13 @@ const HeroSection = () => {
   return (
     <div className="relative">
       <Image
-        src="/image/heroimage.jpg"
+        src="/image/heroimage.webp"
+        alt="Landscape view"
         width={500}
         height={500}
-        alt="Picture of the author"
-        className="w-full object-cover h-[750px] pt-20"
-        priority
+        className="w-full object-cover pt-20 h-[47rem]"
+        sizes="100vw"
+        loading="eager" // Pastikan loading prioritas
       />
       <div className="absolute left-0 right-0 bottom-0 transform translate-y-1/2">
         <div className="container mx-auto px-4">

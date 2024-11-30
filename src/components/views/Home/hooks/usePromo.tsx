@@ -42,6 +42,7 @@ const usePromo = () => {
       revalidateOnFocus: false,
       dedupingInterval: 5000,
       errorRetryCount: 3,
+      revalidateOnReconnect: false,
     }
   );
 
