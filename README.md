@@ -4,6 +4,10 @@
 
 <p id="description"Tripvel was created as a solution to various problems in the Indonesian tourism industry. Tripvel with the tagline “Explore Beyond Boundaries, Travel with Ease</p>
 
+<h2>👜 About TripVel</h2>
+
+Tripvel is an all-in-one platform that integrates all travel needs, from destination search, activity booking, to the payment process in one seamless application. The app is designed to make it easier for travelers to plan and enjoy their travel experience in Indonesia.
+
 <h2>🚀 Demo</h2>
 
 [https://tripvel-next.vercel.app/](https://tripvel-next.vercel.app/)
@@ -14,7 +18,6 @@
 
 <img src="https://res.cloudinary.com/dbxfmigzj/image/upload/v1732935008/Macbook-Air-tripvel-next.vercel.app_1_zto8oy.png" width="1000">
 
-  
   
 <h2>🧐 Features</h2>
 
