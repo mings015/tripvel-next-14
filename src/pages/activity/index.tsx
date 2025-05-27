@@ -139,7 +139,7 @@ const Activity = () => {
                       <div className="absolute top-4 right-4">
                         <Badge variant="secondary" className="bg-white/90">
                           <Star className="h-4 w-4 text-yellow-500 mr-1" />
-                          {activity.rating.toFixed(1)}
+                          {Number(activity.rating || 0).toFixed(1)}
                         </Badge>
                       </div>
                     </div>
